@@ -1,0 +1,80 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+
+    <h:body>
+        <ui:composition template="include/common.xhtml">	
+            <ui:define name="content">
+
+       <h:form>
+
+         
+                    <input type="hidden" name="departmentId" value="#{departmentDetailBean.deparment.departmentId}"/>
+
+
+                    <p:panel header="DaF Gruppe" style="width: 100%">
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <p:outputLabel for="company" value="Bölüm " />
+                            <p:selectOneMenu id="company" value="#{schoolSummeryBean.selectedSchoolId}" style="width:150px">
+                                <p:ajax listener="#{schoolSummeryBean.filter()}" update="company" />
+                                <f:selectItem itemLabel="Şehir Seç" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{departmentSummeryBean.departmentList}" var="department"
+                                               itemValue="#{department.departmentId}"
+                                               itemLabel="#{department.departmentName}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                        <h:commandLink value="Süz" action="#{schoolSummeryBean.filter()}"/>
+                        <p:dataTable var="school" value="#{schoolSummeryBean.schoolList}">
+                            <!--                    <p:column headerText="Id">
+                                                    <h:outputText value="#{school.schoolId}"/>
+                                                </p:column>-->
+                            <p:column headerText="Okul Adı">
+
+
+
+                                <h:outputLink value="school/ClassRoomSummery.xhtml">
+                                    <f:param name="schoolId" value="#{school.schoolId}"/>
+                                    <h:outputText value="#{school.schoolName}"/></h:outputLink>
+                            </p:column>
+                            <p:column headerText="Şehir">
+                                <h:outputText value="#{school.department.departmentName}"/>
+                            </p:column>
+                            <p:column headerText="Satan Kisi">
+                                <h:outputText value="#{school.schoolManagerId}"/>
+                            </p:column>
+
+
+
+                            <p:column headerText="Değiştir">
+                                <h:outputLink value="SchoolDetail.xhtml">
+                                    <f:param name="schoolId" value="#{school.schoolId}"/>
+                                    Güncelle </h:outputLink> &nbsp;&nbsp;&nbsp;&nbsp;
+                                <p:commandButton value="Sil" actionListener="#{schoolDetailBean.delete()}" icon="ui-icon-check" />
+                            </p:column>
+                        </p:dataTable>
+                        
+
+                        <h:outputLink value="SchoolDetail.xhtml"
+                                      styleClass="ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only">
+                            <span class="ui-button-text">Yeni Kayit</span>
+                        </h:outputLink>
+                    </p:panel>
+
+                </h:form>
+
+
+            </ui:define>
+        </ui:composition>
+
+
+    </h:body>
+
+</html>
+

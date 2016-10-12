@@ -1,0 +1,47 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            
+            <p:panel header="SINIFA DERS EKLE" style="width: 100%">
+                <p:dataTable var="courceContent" value="#{courceContentSummeryBean.courceContentList}">
+                  
+                    <p:column headerText="DERS ADI">
+                        <h:outputLink value="../school/ExamSummery.xhtml">
+                            <f:param name="courceContentId" value="#{courceContent.classContentId}"/>
+                            <h:outputText value="#{courceContent.classContentName}"/></h:outputLink>
+                    </p:column>
+                    <p:column headerText="ÖĞRETMEN ADI">
+                        <h:outputText value="#{courceContent.teacher.user.userName}"/>
+                    </p:column>
+                    <p:column headerText="DEĞİŞTİR">
+                        <h:outputLink value="CourceContentDetail.xhtml">
+                            <f:param name="classRoomId" value="#{courceContentSummeryBean.classRoomId}"/>
+                            Güncelle </h:outputLink>
+                    </p:column>
+                    <p:column headerText="ÖĞRENCİ EKLE">
+                        <h:outputLink value="../school/StudentDetail.xhtml">
+                            <f:param name="courceContentId" value="#{courceContent.classContentId}"/>
+                            Ogenci Ekle </h:outputLink>
+                    </p:column>
+                </p:dataTable>
+                <h:outputLink value="CourceContentDetail.xhtml">
+                    <f:param name="classRoomId" value="#{courceContentSummeryBean.classRoomId}"/>
+                    Yeni Kayit</h:outputLink>
+
+
+            </p:panel>
+
+        </h:form>
+
+    </h:body>
+
+</html>
+

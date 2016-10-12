@@ -1,0 +1,98 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="include/common.xhtml">	
+            <ui:define name="content">	
+                <h:form>
+                    <p:commandButton value="Ödevi Başlat" action="#{studentQuestionSummeryBean.startExam()}"  disabled="#{studentQuestionSummeryBean.solution.solutionStatus!=0}" 
+                                     />
+                    <input type="hidden" name="examId" value="#{studentQuestionSummeryBean.currentExamId}"/>
+                    <p:clock pattern="HH:mm:ss dd.MM.yyyy" mode="server" /><br/><br/><br/>
+                    <h:outputText value="#{studentQuestionSummeryBean.solution.exam.examName}"/><br/>
+                    <p:column>
+                        <p:panel  id="answerPanel">
+                            <p:column headerText="Sinav ">
+                                <p:panel header="DaF Gruppe" style="width: 100%" rendered="#{!studentQuestionSummeryBean.isStart}">
+                                    <input type="hidden" name="examId" value="#{studentQuestionSummeryBean.solution.exam.examId}" />
+                                    <ui:repeat var="answer" value="#{studentQuestionSummeryBean.solution.answerList}">
+                                        <h:outputText value="#{answer.question.questionNumber}"/><br/>
+                                        <h:outputText value="#{answer.question.text}" escape="false"/><br/>
+                                        <br/>
+                                        <p:panel rendered="#{answer.question.questionType.label.contains('Cokdan Tek Secmeli')}">
+                                            <h:selectOneRadio value="#{answer.answer1}" >
+                                                <f:selectItem itemValue="A" itemLabel=" A " rendered="#{answer.question.optionCount>=1 }"/>
+                                                <f:selectItem itemValue="B" itemLabel=" B " rendered="#{answer.question.optionCount>=2}"/>
+                                                <f:selectItem itemValue="C" itemLabel=" C " rendered="#{answer.question.optionCount>=3}"/>
+                                                <f:selectItem itemValue="D" itemLabel=" D" rendered="#{answer.question.optionCount>=4}"/>
+                                            </h:selectOneRadio>
+                                        </p:panel>
+                                        <p:panel rendered="#{answer.question.questionType.label.contains('Cokdan Cok Secmeli')}">
+                                            <h:selectManyCheckbox value="#{answer.corrects}">
+                                                <f:selectItem itemValue="A" itemLabel="A" itemDisabled="#{questionDetailBean.question.optionCount lt 1}"/>
+                                                <f:selectItem itemValue="B" itemLabel="B" itemDisabled="#{questionDetailBean.question.optionCount lt 2}"/>
+                                                <f:selectItem itemValue="C" itemLabel="C" itemDisabled="#{questionDetailBean.question.optionCount lt 3}"/>
+                                                <f:selectItem itemValue="D" itemLabel="D" itemDisabled="#{questionDetailBean.question.optionCount lt 4}"/>
+                                                <f:selectItem itemValue="E" itemLabel="E" itemDisabled="#{questionDetailBean.question.optionCount lt 5}"/>
+                                                <f:selectItem itemValue="F" itemLabel="F" itemDisabled="#{questionDetailBean.question.optionCount lt 6}"/>
+                                                <f:selectItem itemValue="G" itemLabel="G" itemDisabled="#{questionDetailBean.question.optionCount lt 7}"/>
+                                                <f:selectItem itemValue="H" itemLabel="H" itemDisabled="#{questionDetailBean.question.optionCount lt 8}"/>
+                                            </h:selectManyCheckbox>
+                                        </p:panel>
+                                        <p:panel rendered="#{answer.question.questionType.label.contains('Tekli Bosluk Doldurma')}">
+                                            <h:inputText value="#{answer.question.corrrect1}"/>
+                                        </p:panel>
+                                        <p:panel rendered="#{answer.question.questionType.label.contains('Coklu Bosluk Doldurma')}">
+                                            <h:inputText value="#{questionDetailBean.question.corrrect1}" rendered="#{questionDetailBean.question.optionCount>=1 }"/>
+                                            <h:inputText value="#{questionDetailBean.question.corrrect2}" rendered="#{questionDetailBean.question.optionCount>=2 }"/>
+                                            <h:inputText value="#{questionDetailBean.question.corrrect3}" rendered="#{questionDetailBean.question.optionCount>=3 }"/>
+                                            <h:inputText value="#{questionDetailBean.question.corrrect4}" rendered="#{questionDetailBean.question.optionCount>=4 }"/>
+                                            <h:inputText value="#{questionDetailBean.question.corrrect5}" rendered="#{questionDetailBean.question.optionCount>=5 }"/>
+                                            <h:inputText value="#{questionDetailBean.question.corrrect6}" rendered="#{questionDetailBean.question.optionCount>=6 }"/>
+                                            <h:inputText value="#{questionDetailBean.question.corrrect7}" rendered="#{questionDetailBean.question.optionCount>=7 }"/> 
+                                            <h:inputText value="#{questionDetailBean.question.corrrect8}" rendered="#{questionDetailBean.question.optionCount>=8 }"/>
+                                            <h:inputText value="#{questionDetailBean.question.corrrect9}" rendered="#{questionDetailBean.question.optionCount>=9 }"/>
+                                            <h:inputText value="#{questionDetailBean.question.corrrect10}" rendered="#{questionDetailBean.question.optionCount>=10 }"/>
+                                        </p:panel>
+                                        <p:panel rendered="#{answer.question.questionType.label.contains('Coklu Eslestirme')}">
+                                            
+                                        </p:panel>
+                                        <p:panel rendered="#{answer.question.questionType.label.contains('Dogru Yanlis Eslestirme')}">
+                                        </p:panel>
+                                        <p:panel rendered="#{answer.question.questionType.label.contains('Cokdan Tek Secmeli')}">
+                                        </p:panel>
+                                    </ui:repeat>
+                                </p:panel>
+                            </p:column>
+                            <p:column rendered="#{studentQuestionSummeryBean.isShownResult}">
+                                <p:panel header="Cevaplar">
+                                    <h:outputText value="Sonuçlar Gösterildi"/>
+                                    <ui:repeat var="answer" value="#{studentQuestionSummeryBean.solution.answerList}">
+                                        <h:outputText value="#{answer.question.questionNumber} Nolu Sorunun Çözümü "/>
+                                        <br/>
+                                        <br/>
+                                        <h:outputText value="#{answer.question.questionAnswer}" escape="false"/><br/>
+                                        <br/>
+                                    </ui:repeat>
+                                </p:panel>
+                            </p:column>
+                        </p:panel>
+                    </p:column>
+
+                    <p:commandButton value="Sınavı Bitir" action="#{studentQuestionSummeryBean.finishExam()}" disabled="#{studentQuestionSummeryBean.solution.solutionStatus==2}"  />
+
+
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

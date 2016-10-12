@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="include/common.xhtml">	
+            <ui:define name="content">	
+                <h:form>
+                    <p:panel header="Sinif Listesi" style="width: 100%">
+
+                        <input type="hidden" name="classRoomId" value="#{teacherCourceDetailBeanByExam.classRoomId}"/>
+
+                        <p:dataTable var="student" value="#{teacherCourceDetailBeanByExam.studentList}">
+                            <p:column headerText="Sinif">
+                                <h:outputText value="#{student.classRoom.classRoomName}"/>
+                            </p:column>
+                            <p:column headerText="Ogrenci Adi">
+                               
+                                   <h:outputLink value="TeacherExamSummery.xhtml">
+                                       <f:param name="studentId" value="#{student.studentId}"/>
+                                      
+                                      <h:outputText value="#{student.user.userName}"/></h:outputLink>
+                            </p:column>
+                             
+                            <p:column headerText="ANALİZ">
+                                      <h:outputText value="#{student.user.userName}"/>
+                               <h:outputLink value="TeacherExamDetail.xhtml">
+                                    <f:param name="studentId" value="#{student.studentId}"/>
+                                    <f:param name="examId" value="#{teacherCourceDetailBeanByExam.examId}"/>
+                                    <h:outputText value="DETAY"/></h:outputLink>
+                            </p:column>
+                        </p:dataTable>
+
+                    </p:panel>
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
+

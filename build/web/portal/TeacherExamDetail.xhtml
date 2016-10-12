@@ -1,0 +1,59 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="include/common.xhtml">	
+            <ui:define name="content">	
+                <h:form>
+                    <p:messages id="msgs" style="color: #D20005;" /> 
+                    <p:panel header="Öğrenci Analiz Sayfası" style="width: 100%">
+                        <p:dataTable var="answer" value="#{teacherExamDetailBean.solution.answerList}">
+                            <p:column headerText="Soru Numarası">
+                                <h:outputText value="#{answer.question.questionNumber}" escape="false"/>
+                            </p:column>
+                            <p:column headerText="Soru Metni">
+                                <h:outputText value="#{answer.question.text}" escape="false"/>
+                            </p:column>
+
+
+                            <p:column headerText="Öğrencinin Cevabı">
+                                <h:outputText value="#{answer.answer1}"/>
+                            </p:column>
+
+                            <p:column headerText="Dogru cevap">
+                                <h:outputText value="#{answer.question.corrrect1}"/>
+                            </p:column>
+
+                        </p:dataTable>
+
+                        <p:panel header="Öğrenci ödev başarı  puanı!" style="width: 100%">
+
+                            <p:commandButton value="#{teacherExamDetailBean.solution.result}" action="#{teacherExamDetailBean.fake()}" />
+                        </p:panel>
+                        <br/><br/>
+                        <p:commandButton value="Öğrenci gelişim grafiği" action="#{teacherExamDetailBean.gotoGraphics()}"   />
+                        
+                    </p:panel>
+
+
+                    <br/>
+
+                    <p:panel header="Bu sayfada öğrencinizin ödev başarı durumunu analiz edebilirsiniz. Sol üstteki öğrenci gelişim grafiğine tıklayarak öğrencinizin toplam başarı durumunu grafiksel olarak analiz edebilirsiniz!" style="width: 100%">
+
+
+                    </p:panel>
+
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

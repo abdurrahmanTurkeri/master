@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="include/common.xhtml">	
+            <ui:define name="content">	
+                <h:form>
+                    <p:messages id="msgs" style="color: #D20005;" /> 
+                    <p:panel header="DAF GRUPPE" style="width: 100%">
+                        <input type="hidden" name="courceContentId" value="#{studentExamBean.currentCourceContentId}"/>
+                        <h2>
+                            
+                            <h:outputText value="Ödev Listesi"/></h2>
+                        <p:dataTable var="exam" value="#{studentExamBean.examList}" >
+                            <p:column headerText="Ödev Adı" >
+                                <p:panel rendered="#{exam.status!=0}">   
+                                    <h:outputLink value="StudentQuestionsSummery.xhtml">
+                                        <f:param name="examId" value="#{exam.examId}"/>
+                                        <h:outputText value="#{exam.examName}"/></h:outputLink>
+                                </p:panel>
+                                <p:panel rendered="#{exam.status==0}">
+                                    <p:commandButton value="#{exam.examName}" action="#{studentExamBean.itIsntStart()}" ajax="false"/>
+                                </p:panel>
+                            </p:column>    
+
+                            <p:column headerText="Ödev Durumu " >
+                                <p:panel rendered="#{exam.status==1}">
+                                    <h:outputText value="Ödev Başlatıldı.Başarılar" style="color: red"/>
+                                </p:panel>
+                                <p:panel rendered="#{exam.status==2}">
+                                    <h:outputText value="Ödev Tamamladı Gözüküyor."/>
+                                </p:panel>
+                                <p:panel rendered="#{exam.status==0}">
+                                    <h:outputText value="Ödev Başlatilmadı."/> <h:outputText value="#{exam.examStartDate} de Başlayacak " rendered="#{exam.status==1}"/> <h:outputText value="Lütfen Ögretmenin Ödevi başlatmasını bekleyiniz"/>
+                                </p:panel>
+
+                            </p:column>
+
+                        </p:dataTable>
+
+                    </p:panel>
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

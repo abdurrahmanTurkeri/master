@@ -1,0 +1,38 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="include/common.xhtml">	
+            <ui:define name="content">	
+                <h:form>
+
+                    <p:panel header="Ogrenci sinav sayfasi" style="width: 100%">
+
+                        <p:dataTable var="solution" value="#{teacherExamBean.solutionList}">
+                            <p:column headerText="Sinav No">
+                                <h:outputText value="#{solution.exam.examId}"/>
+                            </p:column>
+                            <p:column headerText="Sinav Adi">
+                                <h:outputLink value="TeacherExamDetail.xhtml">
+                                    <f:param name="solutionId" value="#{solution.solutionId}"/>
+                                    <h:outputText value="#{solution.exam.examName}"/></h:outputLink>
+                            </p:column>
+
+
+                        </p:dataTable>
+
+                    </p:panel>
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

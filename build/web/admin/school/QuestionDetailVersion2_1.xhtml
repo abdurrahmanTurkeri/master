@@ -1,0 +1,258 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../include/common.xhtml">	
+            <ui:define name="content">	
+
+
+                <h:form>
+                    <p:panel id="mainPanel" header="Soru Ekleme Modulu" >
+                        <p:messages id="msgs" />
+                        <input type="hidden" name="examId" value="#{questionDetailBean.selectedExamId}"/>
+                        <h:outputLabel value="Soru Metnini gözükmesini istediğiniz şekilde giriniz"/>
+                        <p:editor id="editor" style="width:100%" value="#{questionDetailBean.question.text}"></p:editor>
+                        <p:panel> <h:outputLabel value="Sorunun Puani"/>
+                            <h:inputText value="#{questionDetailBean.question.questionPoint}"/></p:panel>      
+                        <p:panel>
+                            <h:outputLabel value="Soru Numarasi Ve Siralamasi"/> 
+                            <h:inputText value="#{questionDetailBean.question.questionNumber}"/></p:panel>
+                        <p:panel>
+                            <h:outputLabel value="Secenek Sayisi"/>
+                            <h:selectOneRadio value="#{questionDetailBean.question.optionCount}">
+                                <f:selectItem itemValue="1" itemLabel="1"/>
+                                <f:selectItem itemValue="2" itemLabel="2"/>
+                                <f:selectItem itemValue="3" itemLabel="3"/>
+                                <f:selectItem itemValue="4" itemLabel="4"/>
+                                <f:selectItem itemValue="5" itemLabel="5"/>
+                                <f:selectItem itemValue="6" itemLabel="6"/>
+                                <f:selectItem itemValue="7" itemLabel="7"/>
+                                <f:selectItem itemValue="8" itemLabel="8"/>
+                                <f:selectItem itemValue="9" itemLabel="9"/>
+                                <f:selectItem itemValue="10" itemLabel="10"/>
+                                <f:ajax event="change" execute="@form" 
+                                        render="@form"/>
+                            </h:selectOneRadio></p:panel>
+                        <p:panel>
+
+                            <h:outputLabel value="Dogru cevap Sayisi"/>
+                            <h:selectOneRadio value="#{questionDetailBean.question.correctCount}">
+                                <f:selectItem itemValue="1" itemLabel="1"/>
+                                <f:selectItem itemValue="2" itemLabel="2"/>
+                                <f:selectItem itemValue="3" itemLabel="3"/>
+                                <f:selectItem itemValue="4" itemLabel="4"/>
+                                <f:selectItem itemValue="5" itemLabel="5"/>
+                                <f:selectItem itemValue="6" itemLabel="6"/>
+                                <f:selectItem itemValue="7" itemLabel="7"/>
+                                <f:selectItem itemValue="8" itemLabel="8"/>
+                                <f:selectItem itemValue="9" itemLabel="9"/>
+                                <f:selectItem itemValue="10" itemLabel="10"/>
+                                <f:ajax event="change" execute="@form" 
+                                        render="@form"/>
+                            </h:selectOneRadio></p:panel>
+                        <p:panel>
+                            <h:outputLabel value="Soru Tipi"/>
+                            <h:selectOneRadio value="#{questionDetailBean.question.questionType}"  >
+                                <f:selectItems value="#{questionDetailBean.questionTypeList}" var="questionType" 
+                                               itemLabel="#{questionType.label}" 
+                                               itemValue ="#{questionType}"/>
+                                <f:ajax event="change" execute="@form" 
+                                        render="@form" />
+                            </h:selectOneRadio>
+
+                        </p:panel>
+                        <p:panel id="panelCokdanTek" rendered="#{questionDetailBean.question.questionType.label.contains('Cokdan Tek Secmeli')}" header="Yeni Soru">
+                            <h:outputLabel value="Dogru cevabi seciniz"/>
+
+                            <h:selectOneRadio value="#{questionDetailBean.question.corrrect1}">
+                                <f:selectItem itemValue="A" itemLabel="A" itemDisabled="#{questionDetailBean.question.optionCount lt 1}"/>
+                                <f:selectItem itemValue="B" itemLabel="B" itemDisabled="#{questionDetailBean.question.optionCount lt 2}"/>
+                                <f:selectItem itemValue="C" itemLabel="C" itemDisabled="#{questionDetailBean.question.optionCount lt 3}"/>
+                                <f:selectItem itemValue="D" itemLabel="D" itemDisabled="#{questionDetailBean.question.optionCount lt 4}"/>
+                                <f:selectItem itemValue="E" itemLabel="E" itemDisabled="#{questionDetailBean.question.optionCount lt 5}"/>
+                            </h:selectOneRadio>
+                        </p:panel>
+                        <p:panel id="panelCokdanCok" header="Yeni Soru1"  rendered="#{questionDetailBean.question.questionType.label.contains('Cokdan Cok Secmeli')}">
+                            <p:selectManyCheckbox value="#{questionDetailBean.question.correctList}" >
+                                <f:selectItem itemValue="A" itemLabel="A" itemDisabled="#{questionDetailBean.question.optionCount lt 1}"/>
+                                <f:selectItem itemValue="B" itemLabel="B" itemDisabled="#{questionDetailBean.question.optionCount lt 2}"/>
+                                <f:selectItem itemValue="C" itemLabel="C" itemDisabled="#{questionDetailBean.question.optionCount lt 3}"/>
+                                <f:selectItem itemValue="D" itemLabel="D" itemDisabled="#{questionDetailBean.question.optionCount lt 4}"/>
+                                <f:selectItem itemValue="E" itemLabel="E" itemDisabled="#{questionDetailBean.question.optionCount lt 5}"/>
+                                <f:selectItem itemValue="F" itemLabel="F" itemDisabled="#{questionDetailBean.question.optionCount lt 6}"/>
+                                <f:selectItem itemValue="G" itemLabel="G" itemDisabled="#{questionDetailBean.question.optionCount lt 7}"/>
+                                <f:selectItem itemValue="G" itemLabel="G" itemDisabled="#{questionDetailBean.question.optionCount lt 8}"/>
+                            </p:selectManyCheckbox>
+                        </p:panel>
+                        <p:panel id="panelTekliBosluk" header="Yeni Soru2"  rendered="#{questionDetailBean.question.questionType.label.contains('Tekli Bosluk Doldurma')}">
+                            <h:outputLabel value="Lütfen dogru seçenegi giriniz"/>
+                            <h:inputText value="#{questionDetailBean.question.corrrect1}" rendered="#{questionDetailBean.question.optionCount>=1 }"/>
+                            <h:inputText value="#{questionDetailBean.question.corrrect2}" rendered="#{questionDetailBean.question.optionCount>=2 }"/>
+                            <h:inputText value="#{questionDetailBean.question.corrrect3}" rendered="#{questionDetailBean.question.optionCount>=3 }"/>
+                            <h:inputText value="#{questionDetailBean.question.corrrect4}" rendered="#{questionDetailBean.question.optionCount>=4 }"/>
+                            <h:inputText value="#{questionDetailBean.question.corrrect5}" rendered="#{questionDetailBean.question.optionCount>=5 }"/>
+                            <h:inputText value="#{questionDetailBean.question.corrrect6}" rendered="#{questionDetailBean.question.optionCount>=6 }"/>
+                            <h:inputText value="#{questionDetailBean.question.corrrect7}" rendered="#{questionDetailBean.question.optionCount>=7 }"/> 
+                            <h:inputText value="#{questionDetailBean.question.corrrect8}" rendered="#{questionDetailBean.question.optionCount>=8 }"/>
+                            <h:inputText value="#{questionDetailBean.question.corrrect9}" rendered="#{questionDetailBean.question.optionCount>=9 }"/>
+                            <h:inputText value="#{questionDetailBean.question.corrrect10}" rendered="#{questionDetailBean.question.optionCount>=10 }"/>
+                        </p:panel>
+                        <p:panel id="panelCokluBosluk" header="Yeni Soru3"  rendered="#{questionDetailBean.question.questionType.label.contains('Coklu Bosluk Doldurma')}">
+                            <h:outputLabel value="Lutfen dogru secenegi yaziniz"/>
+                            <br/>
+                            <h:inputText value="#{questionDetailBean.question.corrrect1}" rendered="#{questionDetailBean.question.optionCount>=1 and questionDetailBean.question.correctCount>=1}" /> 
+                            <h:inputText value="#{questionDetailBean.question.corrrect2}"  rendered="#{questionDetailBean.question.optionCount>=1 and questionDetailBean.question.correctCount>=2}"/> 
+                            <h:inputText value="#{questionDetailBean.question.corrrect3}"  rendered="#{questionDetailBean.question.optionCount>=1 and questionDetailBean.question.correctCount>=3}"/> <br/>
+                            <h:inputText value="#{questionDetailBean.question.corrrect4}"  rendered="#{questionDetailBean.question.optionCount>=2 and questionDetailBean.question.correctCount>=1}"/> 
+                            <h:inputText value="#{questionDetailBean.question.corrrect5}"  rendered="#{questionDetailBean.question.optionCount>=2 and questionDetailBean.question.correctCount>=2}"/> 
+                            <h:inputText value="#{questionDetailBean.question.corrrect6}" rendered="#{questionDetailBean.question.optionCount>=2 and questionDetailBean.question.correctCount>=3}" />  <br/>
+                            <h:inputText value="#{questionDetailBean.question.corrrect7}"  rendered="#{questionDetailBean.question.optionCount>=3 and questionDetailBean.question.correctCount>=1}"/> 
+                            <h:inputText value="#{questionDetailBean.question.corrrect8}"  rendered="#{questionDetailBean.question.optionCount>=3 and questionDetailBean.question.correctCount>=2}"/> 
+                            <h:inputText value="#{questionDetailBean.question.corrrect9}"  rendered="#{questionDetailBean.question.optionCount>=3 and questionDetailBean.question.correctCount>=3}"/> 
+
+                        </p:panel>
+                        <p:panel id="panelEslestirme" header="Yeni Soru4"  rendered="#{questionDetailBean.question.questionType.label.contains('Coklu Eslestirme')}">
+                            <h:selectOneRadio value="#{questionDetailBean.question.corrrect1}">
+                                <f:selectItem itemValue="A" itemLabel="A" itemDisabled="#{questionDetailBean.question.optionCount lt 1}"/>
+                                <f:selectItem itemValue="B" itemLabel="B" itemDisabled="#{questionDetailBean.question.optionCount lt 2}"/>
+                                <f:selectItem itemValue="C" itemLabel="C" itemDisabled="#{questionDetailBean.question.optionCount lt 3}"/>
+                                <f:selectItem itemValue="D" itemLabel="D" itemDisabled="#{questionDetailBean.question.optionCount lt 4}"/>
+                                <f:selectItem itemValue="E" itemLabel="E" itemDisabled="#{questionDetailBean.question.optionCount lt 5}"/>
+                            </h:selectOneRadio>
+
+                            <h:selectOneRadio value="#{questionDetailBean.question.corrrect2}" rendered="#{questionDetailBean.question.correctCount>=2}">
+                                <f:selectItem itemValue="A" itemLabel="A" itemDisabled="#{questionDetailBean.question.optionCount lt 1}"/>
+                                <f:selectItem itemValue="B" itemLabel="B" itemDisabled="#{questionDetailBean.question.optionCount lt 2}"/>
+                                <f:selectItem itemValue="C" itemLabel="C" itemDisabled="#{questionDetailBean.question.optionCount lt 3}"/>
+                                <f:selectItem itemValue="D" itemLabel="D" itemDisabled="#{questionDetailBean.question.optionCount lt 4}"/>
+                                <f:selectItem itemValue="E" itemLabel="E" itemDisabled="#{questionDetailBean.question.optionCount lt 5}"/>
+                            </h:selectOneRadio>
+
+                            <h:selectOneRadio value="#{questionDetailBean.question.corrrect3}" rendered="#{questionDetailBean.question.correctCount>=3}">
+                                <f:selectItem itemValue="A" itemLabel="A" itemDisabled="#{questionDetailBean.question.optionCount lt 1}"/>
+                                <f:selectItem itemValue="B" itemLabel="B" itemDisabled="#{questionDetailBean.question.optionCount lt 2}"/>
+                                <f:selectItem itemValue="C" itemLabel="C" itemDisabled="#{questionDetailBean.question.optionCount lt 3}"/>
+                                <f:selectItem itemValue="D" itemLabel="D" itemDisabled="#{questionDetailBean.question.optionCount lt 4}"/>
+                                <f:selectItem itemValue="E" itemLabel="E" itemDisabled="#{questionDetailBean.question.optionCount lt 5}"/>
+                            </h:selectOneRadio>
+
+                            <h:selectOneRadio value="#{questionDetailBean.question.corrrect4}" rendered="#{questionDetailBean.question.correctCount>=4}">
+                                <f:selectItem itemValue="A" itemLabel="A" itemDisabled="#{questionDetailBean.question.optionCount lt 1}"/>
+                                <f:selectItem itemValue="B" itemLabel="B" itemDisabled="#{questionDetailBean.question.optionCount lt 2}"/>
+                                <f:selectItem itemValue="C" itemLabel="C" itemDisabled="#{questionDetailBean.question.optionCount lt 3}"/>
+                                <f:selectItem itemValue="D" itemLabel="D" itemDisabled="#{questionDetailBean.question.optionCount lt 4}"/>
+                                <f:selectItem itemValue="E" itemLabel="E" itemDisabled="#{questionDetailBean.question.optionCount lt 5}"/>
+                            </h:selectOneRadio>
+
+                            <h:selectOneRadio value="#{questionDetailBean.question.corrrect5}" rendered="#{questionDetailBean.question.correctCount>=5}">
+                                <f:selectItem itemValue="A" itemLabel="A" itemDisabled="#{questionDetailBean.question.optionCount lt 1}"/>
+                                <f:selectItem itemValue="B" itemLabel="B" itemDisabled="#{questionDetailBean.question.optionCount lt 2}"/>
+                                <f:selectItem itemValue="C" itemLabel="C" itemDisabled="#{questionDetailBean.question.optionCount lt 3}"/>
+                                <f:selectItem itemValue="D" itemLabel="D" itemDisabled="#{questionDetailBean.question.optionCount lt 4}"/>
+                                <f:selectItem itemValue="E" itemLabel="E" itemDisabled="#{questionDetailBean.question.optionCount lt 5}"/>
+                            </h:selectOneRadio>
+
+                            <h:selectOneRadio value="#{questionDetailBean.question.corrrect6}" rendered="#{questionDetailBean.question.correctCount>=6}">
+                                <f:selectItem itemValue="A" itemLabel="A" itemDisabled="#{questionDetailBean.question.optionCount lt 1}"/>
+                                <f:selectItem itemValue="B" itemLabel="B" itemDisabled="#{questionDetailBean.question.optionCount lt 2}"/>
+                                <f:selectItem itemValue="C" itemLabel="C" itemDisabled="#{questionDetailBean.question.optionCount lt 3}"/>
+                                <f:selectItem itemValue="D" itemLabel="D" itemDisabled="#{questionDetailBean.question.optionCount lt 4}"/>
+                                <f:selectItem itemValue="E" itemLabel="E" itemDisabled="#{questionDetailBean.question.optionCount lt 5}"/>
+                            </h:selectOneRadio>
+
+                            <h:selectOneRadio value="#{questionDetailBean.question.corrrect7}" rendered="#{questionDetailBean.question.correctCount>=7}">
+                                <f:selectItem itemValue="A" itemLabel="A" itemDisabled="#{questionDetailBean.question.optionCount lt 1}"/>
+                                <f:selectItem itemValue="B" itemLabel="B" itemDisabled="#{questionDetailBean.question.optionCount lt 2}"/>
+                                <f:selectItem itemValue="C" itemLabel="C" itemDisabled="#{questionDetailBean.question.optionCount lt 3}"/>
+                                <f:selectItem itemValue="D" itemLabel="D" itemDisabled="#{questionDetailBean.question.optionCount lt 4}"/>
+                                <f:selectItem itemValue="E" itemLabel="E" itemDisabled="#{questionDetailBean.question.optionCount lt 5}"/>
+                            </h:selectOneRadio>
+
+                            <h:selectOneRadio value="#{questionDetailBean.question.corrrect8}" rendered="#{questionDetailBean.question.correctCount>=8}">
+                                <f:selectItem itemValue="A" itemLabel="A" itemDisabled="#{questionDetailBean.question.optionCount lt 1}"/>
+                                <f:selectItem itemValue="B" itemLabel="B" itemDisabled="#{questionDetailBean.question.optionCount lt 2}"/>
+                                <f:selectItem itemValue="C" itemLabel="C" itemDisabled="#{questionDetailBean.question.optionCount lt 3}"/>
+                                <f:selectItem itemValue="D" itemLabel="D" itemDisabled="#{questionDetailBean.question.optionCount lt 4}"/>
+                                <f:selectItem itemValue="E" itemLabel="E" itemDisabled="#{questionDetailBean.question.optionCount lt 5}"/>
+                            </h:selectOneRadio>
+
+                            <h:selectOneRadio value="#{questionDetailBean.question.corrrect9}" rendered="#{questionDetailBean.question.correctCount>=9}">
+                                <f:selectItem itemValue="A" itemLabel="A" itemDisabled="#{questionDetailBean.question.optionCount lt 1}"/>
+                                <f:selectItem itemValue="B" itemLabel="B" itemDisabled="#{questionDetailBean.question.optionCount lt 2}"/>
+                                <f:selectItem itemValue="C" itemLabel="C" itemDisabled="#{questionDetailBean.question.optionCount lt 3}"/>
+                                <f:selectItem itemValue="D" itemLabel="D" itemDisabled="#{questionDetailBean.question.optionCount lt 4}"/>
+                                <f:selectItem itemValue="E" itemLabel="E" itemDisabled="#{questionDetailBean.question.optionCount lt 5}"/>
+                            </h:selectOneRadio>
+                        </p:panel>
+                        <p:panel id="panelYesOrNo" header="Yeni Soru5"  rendered="#{questionDetailBean.question.questionType.label.contains('Dogru Yanlis Eslestirme')}">
+                            <h:selectOneRadio value="#{questionDetailBean.question.corrrect2}" rendered="#{questionDetailBean.question.optionCount>=1 }">
+                                <f:selectItem itemValue="#{true}" itemLabel="Evet" />
+                                <f:selectItem itemValue="#{false}" itemLabel="Hayir" />
+
+                            </h:selectOneRadio>
+                            <h:selectOneRadio value="#{questionDetailBean.question.corrrect2}" rendered="#{questionDetailBean.question.optionCount>=2 }">
+                                <f:selectItem itemValue="#{true}" itemLabel="Evet" />
+                                <f:selectItem itemValue="#{false}" itemLabel="Hayir" />
+
+                            </h:selectOneRadio>
+                            <h:selectOneRadio value="#{questionDetailBean.question.corrrect3}" rendered="#{questionDetailBean.question.optionCount>=3 }">
+                                <f:selectItem itemValue="#{true}" itemLabel="Evet" />
+                                <f:selectItem itemValue="#{false}" itemLabel="Hayir"/>
+
+                            </h:selectOneRadio>
+                            <h:selectOneRadio value="#{questionDetailBean.question.corrrect4}" rendered="#{questionDetailBean.question.optionCount>=4 }">
+                                <f:selectItem itemValue="#{true}" itemLabel="Evet"/>
+                                <f:selectItem itemValue="#{false}" itemLabel="Hayir" />
+
+                            </h:selectOneRadio>
+                            <h:selectOneRadio value="#{questionDetailBean.question.corrrect5}" rendered="#{questionDetailBean.question.optionCount>=5 }">
+                                <f:selectItem itemValue="#{true}" itemLabel="Evet" />
+                                <f:selectItem itemValue="#{false}" itemLabel="Hayir" />
+
+                            </h:selectOneRadio>
+                            <h:selectOneRadio value="#{questionDetailBean.question.corrrect6}" rendered="#{questionDetailBean.question.optionCount>=6 }">
+                                <f:selectItem itemValue="#{true}" itemLabel="Evet" />
+                                <f:selectItem itemValue="#{false}" itemLabel="Hayir"/>
+
+                            </h:selectOneRadio>
+                            <h:selectOneRadio value="#{questionDetailBean.question.corrrect7}" rendered="#{questionDetailBean.question.optionCount>=7 }">
+                                <f:selectItem itemValue="#{true}" itemLabel="Evet" />
+                                <f:selectItem itemValue="#{false}" itemLabel="Hayir"/>
+
+                            </h:selectOneRadio>
+                            <h:selectOneRadio value="#{questionDetailBean.question.corrrect8}" rendered="#{questionDetailBean.question.optionCount>=8 }">
+                                <f:selectItem itemValue="#{true}" itemLabel="Evet" />
+                                <f:selectItem itemValue="#{false}" itemLabel="Hayir" />
+
+                            </h:selectOneRadio>
+                            <h:selectOneRadio value="#{questionDetailBean.question.corrrect9}" rendered="#{questionDetailBean.question.optionCount>=9 }">
+                                <f:selectItem itemValue="#{true}" itemLabel="Evet" />
+                                <f:selectItem itemValue="#{false}" itemLabel="Hayir" />
+
+                            </h:selectOneRadio>
+                            <h:selectOneRadio value="#{questionDetailBean.question.corrrect10}" rendered="#{questionDetailBean.question.optionCount>=10 }">
+                                <f:selectItem itemValue="#{true}" itemLabel="Evet"/>
+                                <f:selectItem itemValue="#{false}" itemLabel="Hayir"/>
+
+                            </h:selectOneRadio>
+                        </p:panel>
+
+                    </p:panel>
+                    <p:commandButton value="Kaydet"  action="#{questionDetailBean.save()}" icon="ui-icon-check"/>
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+
+
+
+    </h:body>
+</html>
+

@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../include/common.xhtml">	
+            <ui:define name="content">	
+
+                <h:form>
+                    <p:panel id="panel" header="YENİ SINIF EKLE">
+                        <p:messages id="msgs" />
+                        <input type="hidden" name="classRoomId" value="#{classRoomDetailBean.classRoom.classRoomId}"/>
+                        <h:panelGrid columns="3" cellpadding="5">
+                            <p:outputLabel for="classRoomName" value="SINIF ADI BELİRLE" />
+
+                            <p:inputText id="classRoomName" value="#{classRoomDetailBean.classRoom.classRoomName}" required="true" label="classRoomName">
+                                <f:validateLength minimum="2" />
+                            </p:inputText>
+                            <p:message for="classRoomName" display="icon" />
+                            <h:outputLabel value="OKUL SEÇİMİNİ YAP"/>
+                            <h:selectOneListbox value="#{classRoomDetailBean.selectedSchoolId}">
+                                <f:selectItem itemValue="0" itemLabel="Belirsiz"/>
+                                <f:selectItems value="#{schoolSummeryBean.schoolList}" var="school"
+                                               itemValue="#{school.schoolId}"
+                                               itemLabel="#{school.schoolName}"/>
+                            </h:selectOneListbox>
+                        </h:panelGrid>
+                        <p:commandButton value="Kaydet" update="panel" actionListener="#{classRoomDetailBean.save()}" icon="ui-icon-check" />
+
+                    </p:panel>
+                </h:form>
+
+
+            </ui:define>
+        </ui:composition>
+
+
+    </h:body>
+</html>
+

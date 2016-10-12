@@ -1,0 +1,48 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+          <ui:composition template="include/common.xhtml">	
+        <ui:define name="content">
+
+ <h:form>
+            <p:panel id="panel" header="Yeni Okul">
+                <p:messages id="msgs" />
+                <input type="hidden" name="schoolId" value="#{schoolDetailBean.school.schoolId}"/>
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:outputLabel for="schoolName" value="Okul Adı: " />
+                  
+                    <p:inputText id="schoolName" value="#{schoolDetailBean.school.schoolName}" required="true" label="schoolName">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="schoolName" display="icon" />
+                    <h:outputLabel value="Şehir"/>
+                    <h:selectOneListbox value="#{schoolDetailBean.selectedDeparmentId}">
+                        <f:selectItem itemValue="0" itemLabel="Belirsiz"/>
+                        <f:selectItems value="#{departmentSummeryBean.departmentList}" var="department"
+                                       itemValue="#{department.departmentId}"
+                                       itemLabel="#{department.departmentName}"/>
+                    </h:selectOneListbox>
+                </h:panelGrid>
+                <p:commandButton value="Kaydet" update="panel" actionListener="#{schoolDetailBean.save()}" icon="ui-icon-check" />
+<!--                <p:link outcome="index" value="Anasayfa">
+                    <f:param name="productId" value="10" />
+                </p:link>-->
+            </p:panel>
+        </h:form>
+
+
+            </ui:define>
+        </ui:composition>
+       
+       
+    </h:body>
+</html>
+

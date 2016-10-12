@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+        <style>
+            .ui-button-text-only .ui-button-text {
+                padding: 0.45em 5em;
+                background: #B30015;
+                color:white;
+                cursor: pointer;
+                font-family:Helvetica;
+            }
+            .ui-widget-header .ui-inputfield, .ui-widget-content .ui-inputfield {
+                font-weight: normal;
+                box-shadow: none;
+            }
+
+            .ui-widget-content {
+                color: white;
+                font-family: Helvetica;
+            }
+            .ui-widget-content a{
+                color: #33CCFF;
+                padding: 54px;
+                font-size: 15px !important;
+                font-family: Helvetica;
+            }
+        </style>
+    </h:head>
+    <h:body>
+
+        <ui:composition template="../include/common.xhtml">
+
+            <ui:define name="content">
+
+                <div id="login">
+                    <h:form>
+                        <p:messages id="msgs" /> ̰
+                        <p:panel style="border: 1px solid gray; background: rgba(0,0,0,0.5); width: 30%; height: 40%; margin-left: 35%; margin-right: 35%; margin-top: 15%">
+                            <h:panelGrid columns="2" cellpadding="5" >
+
+                                <h:outputLabel for="message" value="Messakj" />
+                                <p:password id="message" value="#{gcmSenderBean.message}" required="true" />
+                                <br/>
+                                <p:commandButton
+                                    value="Gonder" action="#{gcmSenderBean.sendMyMessage()}"
+                                    />
+                                <br/>
+                                <p:commandLink value="Şifremi Unuttum"/>
+                                &nbsp;&nbsp;<p:link outcome="StudentVerifyPage" value="Yeni Kayit"/>
+                            </h:panelGrid>
+                        </p:panel>
+                    </h:form>
+                </div>
+
+            </ui:define>
+
+        </ui:composition>	
+    </h:body>
+</html>
+

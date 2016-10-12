@@ -1,0 +1,52 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="../include/common.xhtml">	
+            <ui:define name="content">	
+
+                <h:form>
+                    <p:panel id="panel" header="YENİ ÖDEV EKLE">
+                        <p:messages id="msgs" />
+                        <input type="hidden" name="examId" value="#{examDetailBean.selectedExamId}"/>
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <h:outputLabel value="Kursu Seç "/>
+                            <h:selectOneListbox value="#{examDetailBean.selectedCourceContentId}" disabled="#{examDetailBean.courceContentFixed}">
+                                <f:selectItem itemValue="0" itemLabel="Belirsiz"/>
+                                <f:selectItems value="#{courceContentSummeryBean.courceContentList}" var="cource"
+                                               itemValue="#{cource.classContentId}"
+                                               itemLabel="#{cource.classContentName}"/>
+                            </h:selectOneListbox>
+                            <h:outputLabel value="Kitap Adı : "/>
+                            <h:selectOneListbox value="#{examDetailBean.selectedSubjectId}" disabled="#{examDetailBean.subjecttFixed}">
+                                <f:selectItem itemValue="0" itemLabel="Belirsiz"/>
+                                <f:selectItems value="#{examDetailBean.subjectList}" var="subject"
+                                               itemValue="#{subject.subjectId}"
+                                               itemLabel="#{subject.subjectName}"/>
+                            </h:selectOneListbox>
+                            <p:outputLabel for="examName" value="Ödev adını belirle" />
+                            <p:inputText id="examName" value="#{examDetailBean.exam.examName}" required="true" label="examName">
+                                <f:validateLength minimum="2" />
+                            </p:inputText>
+                            <p:message for="examName" display="icon" />
+                        </h:panelGrid>
+                        <p:commandButton value="Kaydet" update="panel" actionListener="#{examDetailBean.save()}" icon="ui-icon-check" />
+
+                    </p:panel>
+                </h:form>
+
+
+            </ui:define>
+        </ui:composition>
+
+
+    </h:body>
+</html>
+

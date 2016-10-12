@@ -1,0 +1,39 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+        <h:outputStylesheet name="./css/default.css"/>
+        <h:outputStylesheet name="./css/cssLayout.css"/>
+        <title>Facelet Title</title>
+    </h:head>
+    
+    <h:body>
+        <h:form>
+            <p:panel id="panel" header="Yeni Departman">
+                <p:messages id="msgs" />
+                <input type="hidden" name="departmentId" value="#{departmentDetailBean.deparment.departmentId}"/>
+                <h:panelGrid columns="4" cellpadding="5">
+                    <p:outputLabel for="departmentName" value="Firma Adi: " />
+                    <p:inputText id="departmentName" value="#{departmentDetailBean.deparment.departmentName}" required="true" label="departmentName">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="departmentName" display="icon" />
+                    <h:outputLabel value="Firma"/>
+                    <h:selectOneRadio value="#{departmentDetailBean.selectedDepartmentId}">
+                        <f:selectItem itemValue="0" itemLabel="Belirsiz"/>
+                        <f:selectItems value="#{companySummeryBean.companyList}" var="company"
+                                       itemValue="#{company.companyId}"
+                                       itemLabel="#{company.companyName}"/>
+                    </h:selectOneRadio>
+                </h:panelGrid>
+                <p:commandButton value="Kaydet" update="panel" actionListener="#{departmentDetailBean.save()}" icon="ui-icon-check" />
+
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
+

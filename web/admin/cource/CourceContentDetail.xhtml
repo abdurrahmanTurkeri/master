@@ -1,0 +1,85 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+        <style type="text/css">
+            .fullLine{
+                width: 100%;
+                float: left;
+                
+            }
+            .fullLine .labelHolder{
+                width: 30%;
+                display: inline-block;
+                
+            }
+            
+             .fullLine .inputHolder{
+                width: 60%;
+                display: inline-block;
+                
+            }
+            .inputHolder select,input{
+                width: 80%;
+                float: left;
+                
+            }
+            
+            
+        </style>
+        
+    </h:head>
+    <h:body>
+        
+        
+        <h:form>
+            <p:panel id="panel" header="YENİ KURS EKLE">
+                <p:messages id="msgs" />
+                <input type="hidden" name="courceContentId" value="#{courceContentDetailBean.courceContent.classContentId}"/>
+            
+                    <div class="fullLine">
+                        
+                        <div class="labelHolder">
+                             <p:outputLabel for="classRoom" value="KURS ADI" />
+                        </div>
+                    
+                        <div class="inputHolder">
+                             <p:inputText id="classRoom" value="#{courceContentDetailBean.courceContent.classContentName}" required="true" label="classRoom">
+                            <f:validateLength minimum="2" />
+                        </p:inputText>
+                        </div>
+
+                       
+                    </div>
+               
+                <h:panelGrid columns="2" cellpadding="5">
+                    <p:outputLabel for="teacher" value="Ogretmen" />
+                    <p:selectOneMenu id="teacher" value="#{courceContentDetailBean.teacherId}" style="width:150px" >
+
+                        <f:selectItem itemLabel="SEÇİNİZ" itemValue="Belirsiz" noSelectionOption="true" />
+                        <f:selectItems value="#{teacherSummeryBean.teacherList}" var="teacher"
+                                       itemValue="#{teacher.teacherId}"
+                                       itemLabel="#{teacher.user.userName}"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                <h:panelGrid columns="2" cellpadding="5">
+                    <p:outputLabel for="subject" value="Konu Secin" />
+                    <p:selectOneMenu id="subject" value="#{courceContentDetailBean.subjectId}" style="width:150px" >
+
+                        <f:selectItem itemLabel="SEÇİNİZ" itemValue="Belirsiz" noSelectionOption="true" />
+                        <f:selectItems value="#{courceContentDetailBean.subjectLsit}" var="subject"
+                                       itemValue="#{subject.subjectId}"
+                                       itemLabel="#{subject.subjectName}"/>
+                    </p:selectOneMenu>
+                </h:panelGrid>
+                <p:commandButton value="Kaydet" update="panel" actionListener="#{courceContentDetailBean.save()}" icon="ui-icon-check" />
+
+            </p:panel>
+        </h:form>
+    </h:body>
+</html>
+

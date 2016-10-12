@@ -1,0 +1,44 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <h:form>
+            <p:growl id="messages" showDetail="true"/>
+            <!--   <p:panelMenu style="width:160px">
+                            <p:submenu label="Kayitlar" icon="ui-icon-refresh" style="height: 200px;">
+                                <p:menuitem value="Sehirler" outcome="/index" icon="ui-icon-disk" />
+                                <p:menuitem value="Okullar" outcome="/admin/SchoolSummery" update="messages" icon="ui-icon-arrowrefresh-1-w" />
+                            </p:submenu>
+                            <p:submenu label="Kisiler" icon="ui-icon-refresh" style="height: 200px;">
+                                <p:menuitem value="Ogretmenler" outcome="/admin/school/TeacherSummery" icon="ui-icon-disk" />
+                            </p:submenu>
+                            <p:submenu label="Genel" icon="ui-icon-refresh" style="height: 200px;">
+                                <p:menuitem value="Kitaplar" outcome="/admin/SubjectSummery" icon="ui-icon-disk" />
+                            </p:submenu>
+                        </p:panelMenu>-->
+            <p:menu>
+                <p:submenu label="Sistem Kayıtları">
+                    <p:menuitem value="Şehirler" outcome="/index" icon="ui-icon-disk" />
+                    <p:menuitem value="Okullar" outcome="/admin/SchoolSummery" update="messages" icon="ui-icon-arrowrefresh-1-w" />
+                    <p:menuitem value="Sınıflar" outcome="/admin/school/ClassRoomSummery" update="messages" icon="ui-icon-arrowrefresh-1-w" />
+                </p:submenu>
+                <p:submenu label="Kişiler">
+                    <p:menuitem value="Kayıtlı Öğretmenler" outcome="/admin/school/TeacherSummery" icon="ui-icon-disk" />
+                </p:submenu>
+                <p:submenu label="DaF Genel">
+                    <p:menuitem value="Kitaplar" outcome="/admin/SubjectSummery" icon="ui-icon-disk" />
+                    <p:menuitem value="Ödevler" outcome="/admin/school/ExamSummery" icon="ui-icon-disk" />
+                </p:submenu>
+            </p:menu>
+            <p:separator />
+        </h:form>
+
+    </h:body>
+</html>
+

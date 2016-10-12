@@ -1,0 +1,102 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+        <style>
+            .ui-button-text-only .ui-button-text {
+                padding: 0.45em 5em;
+                background: #B30015;
+                color:white;
+                cursor: pointer;
+                font-family:Helvetica;
+            }
+            .ui-widget-header .ui-inputfield, .ui-widget-content .ui-inputfield {
+                font-weight: normal;
+                box-shadow: none;
+            }
+
+            .ui-widget-content {
+                color: white;
+                font-family: Helvetica;
+            }
+            .ui-widget-content a{
+                color: #33CCFF;
+                padding: 54px;
+                font-size: 15px !important;
+                font-family: Helvetica;
+            }
+        </style>
+    </h:head>
+    <h:body>
+
+        <ui:composition template="../include/common.xhtml">
+
+            <ui:define name="content">
+
+                <div id="login">
+                    <h:form>
+                        <p:panel id="panel">
+                            <p:messages id="msgs" />
+                            Okul Seçimi   &nbsp;  &nbsp;
+                            <h:selectOneMenu id="mySchool" value="#{ajaxSchoolSelectionBean.currentSchoolId}">
+                                <f:selectItem itemValue="0" itemLabel="-Seç-"/>
+                                <f:selectItems value="#{ajaxSchoolSelectionBean.schoolList}"
+                                               var="school"
+                                               itemValue="#{school.schoolId}"
+                                               itemLabel="#{school.schoolName}"
+                                               />
+                                <f:ajax event="change" render="myClassRoom mySelectedSchool"/>
+                            </h:selectOneMenu>
+                            &nbsp;  &nbsp;      Sınıf Seçimi &nbsp;  &nbsp;
+                            <h:selectOneMenu id="myClassRoom" value="#{ajaxSchoolSelectionBean.currentClassRoomId}">
+                                <f:selectItem itemValue="0" itemLabel="-Seç-"/>
+                                <f:selectItems value="#{ajaxSchoolSelectionBean.classRoomList}"
+                                               var="classRoom"
+                                               itemValue="#{classRoom.classRoomId}"
+                                               itemLabel="#{classRoom.classRoomName}"
+                                               />
+                                <f:ajax event="change" execute="@form" 
+                                        render="mySelectedClassRoom"/>
+                            </h:selectOneMenu> 
+                            Seçilen Okul &nbsp;  &nbsp;
+                            <h:outputText style="color: red" id="mySelectedSchool" value="#{ajaxSchoolSelectionBean.currentSchool.schoolName}"></h:outputText>
+                            Seçilen Sinif   &nbsp;  &nbsp;
+                            <h:outputText  style="color: red;" id="mySelectedClassRoom" value="#{ajaxSchoolSelectionBean.currentClassRoom.classRoomName}"></h:outputText><br/>
+                            <h:panelGrid columns="2" cellpadding="5">
+                                <h:outputLabel for="studentName" value="Öğrenci Kullanıcı Adı" /> 
+                                <p:inputText id="studentName" value="#{ajaxSchoolSelectionBean.user.userName}" required="true" label="studentName" />
+                                <h:outputLabel for="studentPassword" value="Şifre" /> 
+                                <p:password id="studentPassword" value="#{ajaxSchoolSelectionBean.user.userPassword}" required="true" label="studentPassword" />
+                                <h:outputLabel for="studentFirstName" value="Öğrenci Adı" /> 
+                                <p:inputText id="studentFirstName" value="#{ajaxSchoolSelectionBean.user.userFirstName}" required="true" label="studentFirstName" />
+                                <h:outputLabel for="studentLastName" value="Öğrenci Soyadı" /> 
+                                <p:inputText id="studentLastName" value="#{ajaxSchoolSelectionBean.user.userLastName}" required="true" label="studentLastName" />
+                                <h:outputLabel for="studentNumber" value="Öğrenci No" /> 
+                                <p:inputText id="studentNumber" value="#{ajaxSchoolSelectionBean.student.studentNumber}" required="true" label="studentNumber" />
+                                <h:outputLabel for="studentEmail" value="Öğrenci E-Posta" /> 
+                                <p:inputText id="studentEmail" value="#{ajaxSchoolSelectionBean.student.studentEmail}" required="true" label="studentEmail" />
+                                <h:outputLabel for="quardianEmail" value="Veli E-Posta" /> 
+                                <p:inputText id="quardianEmail" value="#{ajaxSchoolSelectionBean.student.quardianMailAdress}" required="false" label="quardianEmail" />
+                                <h:outputLabel for="quardianPhoneNumber" value="Veli Cep Telefonu No" /> 
+                                <p:inputText id="quardianPhoneNumber" value="#{ajaxSchoolSelectionBean.student.quardianPhoneNumber}" required="true" label="quardianPhoneNumber" />
+
+               
+                                <p:commandButton value="Kaydı Tamamla" actionListener="#{ajaxSchoolSelectionBean.saveStudent()}" ajax="false"></p:commandButton>
+                            </h:panelGrid>
+                        </p:panel>
+
+                    </h:form>
+                </div>
+
+            </ui:define>
+
+        </ui:composition>	
+    </h:body>
+</html>
+
+

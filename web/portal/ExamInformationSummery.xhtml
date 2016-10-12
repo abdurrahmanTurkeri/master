@@ -1,0 +1,67 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="include/common.xhtml">	
+            <ui:define name="content">	
+                <h:form>
+                      <p:messages id="msgs" />
+                      <input type="hidden" name="courceContentId" value="#{examInformationBean.courceContentId}"/>
+                    <p:panel header="Ödev Yönetimi" style="width: 100%">
+                        <p:dataTable var="exam" value="#{examInformationBean.examList}">
+                            <p:column headerText="Ödev No">
+                                <h:outputText value="#{exam.examId}"/>
+                            </p:column>
+                            <p:column headerText="Ödev Adi">
+                                <h:outputLink value="TeacherExamDetail.xhtml">
+                                    <h:outputText value="#{exam.examName}"/></h:outputLink>
+                            </p:column>
+                            <p:column headerText="Başlangiç tarihi">
+                                <p:calendar value="#{examInformationBean.startDates}" pattern="MM/dd/yyyy" disabled="#{exam.status!=0}" >
+                                    
+                                    <f:convertDateTime pattern="MM/dd/yyyy"/>
+                                </p:calendar>
+                            </p:column>
+                            <p:column headerText="Bitiş tarihi">
+                                <p:calendar value="#{examInformationBean.endDates}" pattern="MM/dd/yyyy" disabled="#{exam.status!=0}" >
+                                    <f:convertDateTime pattern="MM/dd/yyyy"/>
+                                </p:calendar>
+
+                            </p:column>
+                            <p:column headerText="İşlem" >
+                                <h:commandButton value="Baslat" action="#{examInformationBean.startExamStatus()}" disabled="#{exam.status!=0}" >
+                                    <f:param value="#{exam.examId}" name="examId"></f:param>
+                                </h:commandButton>
+                                 
+                            </p:column>
+                             <p:column headerText="Durum" >
+                          <p:column headerText="Statu" rendered="#{exam.status==0}">
+                                 <h:outputText value="Başlatılmak İçin Bekliyor."/>
+                            </p:column>
+                             <p:column headerText="Statu" rendered="#{exam.status==1}">
+                                 <h:outputText value="Başlatıldı Sonuçlar Listelenecek."/>
+                            </p:column>
+                                <p:column headerText="Statu" rendered="#{exam.status==2}">
+                                 <h:outputText value="Odev tamamlandı.Sonuçlar hesaplanıyor."/>
+                            </p:column>
+                                 
+                            </p:column>
+                          
+                            
+                        </p:dataTable>
+
+                    </p:panel>
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+

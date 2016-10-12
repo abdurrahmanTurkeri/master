@@ -1,0 +1,46 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+      <ui:composition template="include/common.xhtml">	
+        <ui:define name="content">
+
+ <h:form>
+            <p:panel id="panel" header="KİTAP TANIMLAMA">
+                <p:messages id="msgs" />
+         
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:outputLabel for="schoolName" value="Kitap Adı : " />
+                  
+                    <p:inputText id="schoolName" value="#{subjectDetailBean.subject.subjectName}" required="true" label="schoolName">
+                        <f:validateLength minimum="2" />
+                    </p:inputText>
+                    <p:message for="schoolName" display="icon" />
+                    <h:outputLabel value="Kitap Zorunlumu :"/>
+                    <h:selectOneRadio value="#{subjectDetailBean.selectedMandatory}">
+                        <f:selectItem itemValue="#{true}" itemLabel="Zorunlu"/>
+                        <f:selectItem itemValue="#{false}" itemLabel="Secmeli"/>
+                    </h:selectOneRadio>
+                </h:panelGrid>
+                <p:commandButton value="Kaydet" update="panel" actionListener="#{subjectDetailBean.save()}" icon="ui-icon-check" />
+                <!--                <p:link outcome="index" value="Anasayfa">
+                    <f:param name="productId" value="10" />
+                </p:link>-->
+            </p:panel>
+        </h:form>
+
+
+            </ui:define>
+        </ui:composition>
+      
+       
+    </h:body>
+</html>
+

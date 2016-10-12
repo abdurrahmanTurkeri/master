@@ -1,0 +1,53 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+        <ui:composition template="include/common.xhtml">	
+            <ui:define name="content">	
+                <h:form>
+                     <p:messages id="msgs" />
+                    <p:panel header="DaF Gruppe" style="width: 100%">
+                        <input type="hidden" name="classRoomId" value="#{teacherCourceContentSummeryBean.clasRoomId}"/>
+
+                        <p:dataTable var="courceContent" value="#{teacherCourceContentSummeryBean.courceContentList}">
+                            <p:column headerText="Sınıf">
+                                <h:outputText value="#{courceContent.classRoom.classRoomName}"/>
+                            </p:column>
+                            <p:column headerText="Öğretmen">
+                                <h:outputText value="#{teacherCourceContentSummeryBean.userFullname}"/>
+                            </p:column>
+
+                            <p:column headerText="Ödev Süresi Belirleme">
+                                <h:outputLink value="ExamInformationSummery.xhtml"  style="color: #D20005;text-justify: 10px;font-size: x-large">
+                                    <f:param name="courceContentId" value="#{courceContent.classContentId}"/>
+                                    Ödev Süresini Başlat
+                                </h:outputLink>
+                            </p:column>
+                            <p:column headerText="Listeler" >
+
+                                <h:outputLink value="ExamInformationSummerySecondType.xhtml"  style="color: #D20005;text-justify: 10px;font-size: x-large">
+                                    <f:param name="courceContentId" value="#{courceContent.classContentId}"/>
+                                    Ödev Listesi
+                                </h:outputLink>
+                            </p:column>
+
+
+
+                        </p:dataTable>
+
+                    </p:panel>
+                </h:form>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
+
+

@@ -1,0 +1,55 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+   <ui:composition template="/admin/include/common.xhtml">	
+            <ui:define name="content">		
+
+
+                <h:form>
+                    <p:panel header="Ogretmenler Listesi" style="width: 100%">
+                        <input type="hidden" name="courceContentId" value="#{teacherSummeryBean.selectedClassRoomId}"/>
+                        <p:dataTable var="teacher" value="#{teacherSummeryBean.teacherList}">
+
+                            <p:column headerText="Ogretmen Adi">
+
+                                <h:outputLink value="TeacherDetail.xhtml">
+                                    <f:param name="teacherId" value="#{teacher.teacherId}"/>
+                                    <h:outputText value="#{teacher.user.userFirstName}"/>
+                                </h:outputLink>
+                            </p:column>
+                            <p:column headerText="Mail">
+                                <h:outputText value="#{teacher.email}"/>
+                            </p:column>
+
+                            <p:column headerText="Telefon">
+
+                                
+                                <h:outputText value="#{teacher.gsmNumber}"/>
+                               
+                            </p:column>
+                        </p:dataTable>
+
+                        <h:outputLink value="TeacherDetail.xhtml">
+                          
+                            Yeni Ogretmen Kaydi Olustur</h:outputLink>
+
+
+                    </p:panel>
+
+                </h:form>
+
+
+            </ui:define>
+        </ui:composition>
+      
+    </h:body>
+</html>
+

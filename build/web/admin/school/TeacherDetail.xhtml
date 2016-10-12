@@ -1,0 +1,65 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets">
+    <h:head>
+        <title>Facelet Title</title>
+    </h:head>
+    <h:body>
+         <ui:composition template="../include/common.xhtml">	
+            <ui:define name="content">	
+  <h:form>
+            <p:panel id="panel" header="Yeni Öğretmen Kaydı Oluştur">
+                <p:messages id="msgs" />
+                <input type="hidden" name="teacherId" value="#{teacherDetailBean.teacher.teacherId}"/>
+                <h:panelGrid columns="3" cellpadding="5">
+                    <p:outputLabel for="teacherName" value="Kullanici Adi " />
+                    <p:inputText id="teacherName" value="#{teacherDetailBean.teacher.user.userName}" required="true" label="teacherName">
+                        <f:validateLength minimum="2" />
+                    </p:inputText><br/>
+
+                    <p:outputLabel for="teacherPassword" value="Ogretmen Sifre " />
+                    <p:inputText id="teacherPassword" value="#{teacherDetailBean.teacher.user.userPassword}" required="true" label="teacherPassword">
+                        <f:validateLength minimum="2" />
+                    </p:inputText><br/>
+
+                    <p:outputLabel for="teacherFirstName" value="Ogretmen Ad" />
+                    <p:inputText id="teacherFirstName" value="#{teacherDetailBean.teacher.user.userFirstName}" required="true" label="teacherFirstName">
+                        <f:validateLength minimum="2" />
+                    </p:inputText><br/>
+                    
+                    <p:outputLabel for="teacherLastName" value="Ogretmen Soyad" />
+                    <p:inputText id="teacherLastName" value="#{teacherDetailBean.teacher.user.userLastName}" required="true" label="teacherLastName">
+                        <f:validateLength minimum="2" />
+                    </p:inputText><br/>
+
+                    <p:outputLabel for="email" value="Email  " />
+                    <p:inputText id="email" value="#{teacherDetailBean.teacher.email}" required="true" label="email">
+                        <f:validateLength minimum="2" />
+                    </p:inputText><br/>
+                    
+                    <p:outputLabel for="gsmNumber" value="Telefon Numarasi  " />
+                    <p:inputText id="gsmNumber" value="#{teacherDetailBean.teacher.gsmNumber}" required="true" label="gsmNumber">
+                        <f:validateLength minimum="2" />
+                    </p:inputText><br/>
+
+
+
+                </h:panelGrid>
+                <p:commandButton value="Kaydet" update="panel" actionListener="#{teacherDetailBean.save()}" icon="ui-icon-check" />
+
+            </p:panel>
+        </h:form>
+
+
+
+            </ui:define>
+        </ui:composition>
+  
+      
+    </h:body>
+</html>
+

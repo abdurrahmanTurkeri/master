@@ -1,0 +1,61 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="./admin/include/mainTemplate.xhtml"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core">
+            <ui:define name="content">	
+                <h:form>
+                    <p:panel header="DAF GROUPPE" style="width: 100%">
+                        <h:panelGrid columns="2" cellpadding="5">
+                            <p:outputLabel for="company" value="Bölüm " />
+                            <p:selectOneMenu id="company" value="#{departmentSummeryBean.selectedDepartmentId}" style="width:150px">
+                                <p:ajax listener="#{departmentSummeryBean.filter()}" update="company" />
+                                <f:selectItem itemLabel="Firma Sec" itemValue="" noSelectionOption="true" />
+                                <f:selectItems value="#{companySummeryBean.companyList}" var="company"
+                                               itemValue="#{company.companyId}"
+                                               itemLabel="#{company.companyName}"/>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+                        <p:dataTable var="department" value="#{departmentSummeryBean.departmentList}">
+                            <!--                    <p:column headerText="Id">
+                                                    <h:outputText value="#{department.departmentId}"/>
+                                                </p:column>-->
+                            <p:column headerText="Bolge Adi">
+
+                                <h:outputLink value="admin/SchoolSummery.xhtml">
+                                    <f:param name="departmentId" value="#{department.departmentId}"/>
+                                    <h:outputText value="#{department.departmentName}"/> </h:outputLink>
+                            </p:column>
+                            <p:column headerText="Firma">
+                                <h:outputText value="#{department.company.companyName}"/>
+                            </p:column>
+                            <p:column headerText="Satan Kisi">
+                                <h:outputText value="#{department.salesManagerId}"/>         
+                            </p:column>
+
+                            <p:column headerText="Git">
+                                <h:outputLink value="admin/DepartmentDetail_PRIME.xhtml">
+                                    <f:param name="departmentId" value="#{department.departmentId}"/>
+                                    Güncelle </h:outputLink>
+                            </p:column>
+                        </p:dataTable>
+                        <p:link outcome="admin/DepartmentDetail_PRIME" value="Yeni Bolge Kaydi Olustur">
+
+                        </p:link><br/><br/>
+                        <p:link outcome="admin/school/TeacherDetail" value="Yeni Ogretmen Kaydi Olustur">
+
+                        </p:link><br/><br/>
+                        <p:link outcome="admin/SubjectSummery" value="Yeni Konu Kaydi Olustur">
+
+                        </p:link>
+
+                    </p:panel>
+
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
