@@ -59,7 +59,7 @@ public class QuestionSumeryRest {
             solutionDocument.setResultCode(0);
         } catch (Exception e) {
             solutionDocument.setResultCode(1);
-            solutionDocument.setResultMessage(e.getMessage() + " " + e.getClass().getName());
+            solutionDocument.setResultMessage(e.getMessage() + "first try" + e.getClass().getName());
 
         }
         return solutionDocument;

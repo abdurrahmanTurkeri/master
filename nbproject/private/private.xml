@@ -12,16 +12,13 @@
     </editor-bookmarks>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/Users/macintoshhd/NetBeans/DaFGrouppeV3/src/java/rest/service/ExamRest.java</file>
-            <file>file:/Users/macintoshhd/NetBeans/DaFGrouppeV3/src/java/rest/service/StudentRest.java</file>
-            <file>file:/Users/macintoshhd/NetBeans/DaFGrouppeV3/src/java/rest/document/AnswerDocument.java</file>
-            <file>file:/Users/macintoshhd/NetBeans/DaFGrouppeV3/src/java/entity/Answer.java</file>
-            <file>file:/Users/macintoshhd/NetBeans/DaFGrouppeV3/src/java/rest/service/QuestionSumeryRest.java</file>
-            <file>file:/Users/macintoshhd/NetBeans/DaFGrouppeV3/src/java/rest/service/StudentCourceRest.java</file>
-            <file>file:/Users/macintoshhd/NetBeans/DaFGrouppeV3/src/java/rest/document/SolutionDocument.java</file>
-            <file>file:/Users/macintoshhd/NetBeans/DaFGrouppeV3/src/java/rest/PlatformApplication.java</file>
-            <file>file:/Users/macintoshhd/NetBeans/DaFGrouppeV3/src/java/entity/Exam.java</file>
-            <file>file:/Users/macintoshhd/NetBeans/DaFGrouppeV3/src/java/entity/Solution.java</file>
+            <file>file:/Users/numanturkeri/Documents/Numan/AlmancaOdevPlatformu/src/java/library/BaseRepository.java</file>
+            <file>file:/Users/numanturkeri/Documents/Numan/AlmancaOdevPlatformu/src/java/beans/portal/summery/StudentGraphicxBean.java</file>
+            <file>file:/Users/numanturkeri/Documents/Numan/AlmancaOdevPlatformu/setup/glassfish-resources.xml</file>
+            <file>file:/Users/numanturkeri/Documents/Numan/AlmancaOdevPlatformu/src/java/rest/service/QuestionSumeryRest.java</file>
+            <file>file:/Users/numanturkeri/Documents/Numan/AlmancaOdevPlatformu/src/conf/persistence.xml</file>
+            <file>file:/Users/numanturkeri/Documents/Numan/AlmancaOdevPlatformu/src/java/repository/admin/StudentRepository.java</file>
+            <file>file:/Users/numanturkeri/Documents/Numan/AlmancaOdevPlatformu/web/portal/StudentCourceContentSummery.xhtml</file>
         </group>
     </open-files>
 </project-private>
