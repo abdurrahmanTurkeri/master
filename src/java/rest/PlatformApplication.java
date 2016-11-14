@@ -12,6 +12,7 @@ import javax.ws.rs.core.Application;
 import rest.service.ExamRest;
 import rest.service.QuestionSumeryRest;
 import rest.service.StudentCourceRest;
+import rest.service.StudentInformationTest;
 import rest.service.StudentRest;
 
 /**
@@ -29,6 +30,7 @@ public class PlatformApplication
         resources.add(ExamRest.class);
         resources.add(StudentCourceRest.class);
         resources.add(StudentRest.class);
+        resources.add(StudentInformationTest.class);
         return resources;
     }
 }

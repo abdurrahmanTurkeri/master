@@ -5,9 +5,12 @@
         <property name="serverName" value="ec2-52-11-167-228.us-west-2.compute.amazonaws.com"/>
         <property name="portNumber" value="3306"/>
         <property name="databaseName" value="daf_grouppe"/>
+        <!--        <property name="User" value="root"/>-->
         <property name="User" value="remote_connect"/>
         <property name="Password" value="numan"/>
+        <!--        <property name="URL" value="jdbc:mysql://localhost:3306/daf_grouppe?zeroDateTimeBehavior=convertToNull"/>-->
         <property name="URL" value="jdbc:mysql://ec2-52-11-167-228.us-west-2.compute.amazonaws.com:3306/daf_grouppe?zeroDateTimeBehavior=convertToNull"/>
+       
         <property name="driverClass" value="com.mysql.jdbc.Driver"/>
     </jdbc-connection-pool>
     <jdbc-resource enabled="true" jndi-name="daf" object-type="user" pool-name="mysql_daf_grouppe_remote_connectPool"/>
